@@ -1,0 +1,43 @@
+{
+  "name": "kompaneytsev/backend",
+  "type": "project",
+  "require": {
+    "guzzlehttp/guzzle": "^6.5",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "php": "^7.4",
+    "vlucas/phpdotenv": "^4.1"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Kompaneytsev",
+      "email": "kompaneytsev.alexander@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Parser\\": "parser/",
+      "Loader\\": "loader/",
+      "Saver\\": "saver/"
+    }
+  },
+  "scripts": {
+    "before-start": [
+      "php -r \"copy('.env.example', '.env.local');\""
+    ],
+    "parse-data": [
+      "php scripts/download.php",
+      "php scripts/parse.php"
+    ],
+    "docker-start": [
+      "docker-compose up -d",
+      "php -S 127.0.0.1:5005 -t public"
+    ],
+    "docker-stop": [
+      "docker-compose down"
+    ]
+  }
+}
